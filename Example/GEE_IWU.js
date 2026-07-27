@@ -45,7 +45,12 @@
  * Zachary Browne
  * Anthony Nadelkoe
  *
- * Citation:
+ * Citation:Peña-Arancibia, J.L., Yu, Y., McVicar, T.R., Van Niel, T.G., Chiew, F.H.S., 
+ * Hodgson, D., Vleeshouwer, J., Dino, A., Brown, Z., Nadelko, A., under review. 
+ * Integrating Landsat-based irrigation mapping and actual evapotranspiration estimates 
+ * with hydrological modelling to assess regional irrigation dynamics in a large basin 
+ * experiencing extreme climate variability: Towards a national operational irrigation 
+ * water accounting system. Remote Sensing of Environment. 
  * ============================================================================
  */
 
@@ -56,6 +61,7 @@
 // Site
 var ROI = ee.Geometry.Point(150.090833, -30.697222).buffer(150);
 var title = 'MyallValeB - irrigated';
+var MDB = ee.Geometry.Rectangle([138.57, -37.68, 154.85, -24.58]);
 
 // Time period
 var start = ee.Date('2018-09-01');
@@ -197,7 +203,7 @@ var iterateMonths = function(monthIndex, modelState) {
     .sum()
     .rename('P')
     .unmask(0)
-    .clip(ROI)
+    .clip(MDB)
     .toFloat();
   // total monthly ETa
   var ETm = ETa_col
@@ -409,3 +415,62 @@ print(
     ['orange']
   )
 );
+
+// =====================================================
+// MAP VISUALIZATION & LEGEND (Lines 391+)
+// =====================================================
+
+// 1. Map setup
+Map.setOptions('SATELLITE');
+Map.centerObject(ROI, 16);
+Map.addLayer(ROI, {color: '0000FF80'}, 'ROI (Transparent Blue)');
+
+// 2. Add IWUnet for 2023-01-01
+var iwuVis = {
+  min: 0,
+  max: 200,
+  palette: ['d7191c', 'fdae61', 'ffffbf', 'abd9e9', '2c7bb6']
+};
+var iwuJan23 = outCol.filterDate('2023-01-01', '2023-02-01').first().select('IWUnet');
+Map.addLayer(iwuJan23, iwuVis, 'IWUnet (2023-01-01)');
+
+// 3. Horizontal Legend
+var legend = ui.Panel({
+  style: {
+    position: 'bottom-center',
+    padding: '8px 15px'
+  }
+});
+
+var legendTitle = ui.Label({
+  value: 'IWUnet (mm/month) - 2023-01-01',
+  style: {fontWeight: 'bold', fontSize: '14px', margin: '0 0 4px 0', textAlign: 'center', stretch: 'horizontal'}
+});
+
+var colorBar = ui.Thumbnail({
+  image: ee.Image.pixelLonLat().select(0),
+  params: {
+    bbox: [0, 0, 1, 0.1],
+    dimensions: '200x10',
+    format: 'png',
+    min: 0,
+    max: 1,
+    palette: iwuVis.palette
+  },
+  style: {stretch: 'horizontal', margin: '0px 8px', maxHeight: '10px'}
+});
+
+var legendLabels = ui.Panel({
+  widgets: [
+    ui.Label('0', {margin: '4px 0px'}),
+    ui.Label('50', {margin: '4px 0px', textAlign: 'center', stretch: 'horizontal'}),
+    ui.Label('100', {margin: '4px 0px', textAlign: 'center', stretch: 'horizontal'}),
+    ui.Label('150', {margin: '4px 0px', textAlign: 'center', stretch: 'horizontal'}),
+    ui.Label('>200', {margin: '4px 0px'})
+  ],
+  layout: ui.Panel.Layout.flow('horizontal'),
+  style: {stretch: 'horizontal'}
+});
+
+legend.add(legendTitle).add(colorBar).add(legendLabels);
+Map.add(legend);
