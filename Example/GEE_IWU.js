@@ -97,13 +97,8 @@ var TWC = ee.Image(
 var Ksat = ee.Image(
   'projects/ee-jorgepena/assets/Irrigation/Ksat_AU_0_100_mm'
 ).toFloat();
-// Initial soil moisture AWRA-L root zone moisture May 1987
-// https://awo.bom.gov.au/
-var SM0 = TWC.multiply(
-  ee.Image(
-    'projects/ee-jorgepena/assets/Irrigation/AWO_sm_1987-05'
-  )
-).rename('SM0');
+// Initial soil moisture = 0.5*TWC
+var SM0 = TWC.multiply(0.5).rename('SM0');
 // Field capacity
 // assuming soil moisture (SM0) starts at 50% of storage capacity SM0=0.5×TWC
 var FC = TWC.multiply(FC_fraction);
