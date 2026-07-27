@@ -36,7 +36,7 @@ var TWC = ee.Image('projects/ee-jorgepena/assets/Irrigation/AWC_AU_0_100_mm').to
 // Saturated hydraulic conductivity
 var Ksat = ee.Image('projects/ee-jorgepena/assets/Irrigation/Ksat_AU_0_100_mm').toFloat();
 ```
-4. Run the workflow and estimate IWU.
+4. Run the workflow to estimate monthly irrigation water use (IWU).
 5. Time-series visualisation
 
 ## Authors
