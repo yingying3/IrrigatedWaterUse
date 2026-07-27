@@ -1,5 +1,5 @@
 # Irrigated water use, GEE analysis code
-[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.21620442.svg)](https://doi.org/10.5281/zenodo.21620442)
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.21633331.svg)](https://doi.org/10.5281/zenodo.21633331)
 
 Integrating Landsat-based irrigation mapping and actual evapotranspiration estimates with hydrological modelling to assess regional irrigation dynamics
 Google Earth Engine (GEE) scripts
