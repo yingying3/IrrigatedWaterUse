@@ -23,4 +23,4 @@ For details of the scientific application, please refer to the associated public
 MIT License.
 
 ## Citation
-If you use this software, please cite the associated Zenodo DOI.
+If you use this software, please cite the associated Zenodo DOI, https://doi.org/10.5281/zenodo.21614019.
