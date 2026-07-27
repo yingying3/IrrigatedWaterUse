@@ -28,7 +28,7 @@ Jorge L. Peña-Arancibia, Yingying Yu, Tim R. McVicar, Tom G. Van Niel, Francis 
 
 Associated publication:
 
-Jorge L. Peña-Arancibia, Yingying Yu, Tim R. McVicar, Tom G. Van Niel, Francis H.S. Chiew, Darin Hodgson, Jamie Vleeshouwer, Aarond Dino, Zachary Browne and Anthony Nadelkoe, 2026, Integrating Landsat-based irrigation mapping and actual evapotranspiration estimates with hydrological modelling to assess regional irrigation dynamics in a large basin experiencing extreme climate variability: Towards a national operational irrigation water accounting system, Remote Sensing of Environment. Under Review.
+Jorge L. Peña-Arancibia, Yingying Yu, Tim R. McVicar, Tom G. Van Niel, Francis H.S. Chiew, Darin Hodgson, Jamie Vleeshouwer, Aarond Dino, Zachary Brown and Anthony Nadelko, 2026, Integrating Landsat-based irrigation mapping and actual evapotranspiration estimates with hydrological modelling to assess regional irrigation dynamics in a large basin experiencing extreme climate variability: Towards a national operational irrigation water accounting system, Remote Sensing of Environment. Under Review.
 
 Code DOI:
 https://doi.org/10.5281/zenodo.21614019
